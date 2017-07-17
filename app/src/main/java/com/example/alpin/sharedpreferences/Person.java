@@ -31,6 +31,6 @@ public class Person {
         return noTelp;
     }
     public String info(){
-        return "Nama : "+name+"email : "+email+"alamat : "+alamat+"No Telp: "+noTelp;
+        return "Nama : "+name+"\n email : "+email+"\n alamat : "+alamat+"\n No Telp: "+noTelp;
     }
 }

@@ -1,6 +1,10 @@
 package com.example.alpin.sharedpreferences;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.preference.DialogPreference;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,7 +28,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void doSubmit(View view){
-        if(getPerson() !=null) tvResult.setText(getPerson().info());
+        AlertDialog.Builder mydialogbuilder = new AlertDialog.Builder(MainActivity.this);
+        mydialogbuilder
+                .setTitle("DATA")
+                .setMessage(getPerson().info())
+                .setNegativeButton("Kembali", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        dialog.cancel();
+                    }
+
+                });
+
+        AlertDialog mydialog = mydialogbuilder.create();
+        mydialog.show();
     }
     private Person getPerson(){
         Person person = new Person(sharedPreferences.getString(RegisterActivity.KEY_NAME,""), sharedPreferences.getString(RegisterActivity.KEY_EMAIL,""),
