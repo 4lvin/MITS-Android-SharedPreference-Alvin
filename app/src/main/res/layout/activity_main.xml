@@ -6,9 +6,18 @@
     android:layout_height="match_parent"
     android:layout_margin="18dp"
     tools:context="com.example.alpin.sharedpreferences.MainActivity">
+
+    <Button
+        android:onClick="submit"
+        android:id="@+id/btn_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOGOUT"
+        android:layout_marginLeft="250dp"/>
     <Button
         android:id="@+id/btn_submit"
     android:onClick="doSubmit"
+        android:layout_marginTop="100dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
         android:text="See Data"/>

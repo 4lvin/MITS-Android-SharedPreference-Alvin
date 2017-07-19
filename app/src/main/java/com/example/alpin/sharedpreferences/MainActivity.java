@@ -2,6 +2,7 @@ package com.example.alpin.sharedpreferences;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.DialogPreference;
 import android.support.v7.app.AlertDialog;
@@ -22,9 +23,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tvResult = (TextView) findViewById(R.id.tv_result);
-        sharedPreferences = getSharedPreferences(RegisterActivity.PREFERENCE_NAME, MODE_WORLD_READABLE);
+        sharedPreferences = getSharedPreferences(RegisterActivity.PREFERENCE_NAME, MODE_PRIVATE);
 
 
+    }
+
+    public void submit(View view){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+        startActivity(new Intent(this, RegisterActivity.class));
+        finish();
     }
 
     public void doSubmit(View view){

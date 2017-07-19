@@ -19,6 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nama"
+        android:inputType="textCapWords"
         android:textColor="@android:color/black"
         android:textSize="10pt"/>
     <EditText
@@ -37,6 +38,7 @@
         android:id="@+id/et_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
         android:hint="Email"/>
     <TextView
         android:layout_marginTop="12dp"
@@ -49,6 +51,7 @@
         android:id="@+id/et_alamat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="textCapWords"
         android:hint="Alamat"/>
     <TextView
         android:layout_marginTop="12dp"
@@ -61,6 +64,7 @@
         android:id="@+id/et_noTelp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="phone"
         android:hint="No.Telp"/>
     <Button
         android:onClick="submit"
