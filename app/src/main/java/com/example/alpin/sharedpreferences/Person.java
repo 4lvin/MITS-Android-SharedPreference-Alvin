@@ -5,13 +5,13 @@ package com.example.alpin.sharedpreferences;
  */
 
 public class Person {
-    private String name, email, alamat;
+    private String name, email, password;
     private int noTelp;
 
-    public Person(String name, String email, String alamat, int noTelp) {
+    public Person(String name, String email, String password, int noTelp) {
         this.name = name;
         this.email = email;
-        this.alamat = alamat;
+        this.password = password;
         this.noTelp = noTelp;
     }
 
@@ -23,14 +23,15 @@ public class Person {
         return email;
     }
 
-    public String getAlamat() {
-        return alamat;
+    public String getPassword() {
+        return password;
     }
 
     public int getNoTelp() {
         return noTelp;
     }
+
     public String info(){
-        return "Nama : "+name+"\n email : "+email+"\n alamat : "+alamat+"\n No Telp: "+noTelp;
+        return "Nama : "+name+"\n email : "+email+"\n alamat : "+password+"\n No Telp: "+noTelp;
     }
 }

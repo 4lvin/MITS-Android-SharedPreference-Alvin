@@ -51,7 +51,7 @@
         android:id="@+id/et_alamat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textCapWords"
+        android:inputType="textPassword"
         android:hint="Alamat"/>
     <TextView
         android:layout_marginTop="12dp"

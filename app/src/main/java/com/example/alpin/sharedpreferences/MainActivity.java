@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    private SharedPreferences sharedPreferences;
 
     private TextView tvResult;
 
@@ -23,16 +22,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tvResult = (TextView) findViewById(R.id.tv_result);
-        sharedPreferences = getSharedPreferences(RegisterActivity.PREFERENCE_NAME, MODE_PRIVATE);
+
 
 
     }
 
     public void submit(View view){
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
-        startActivity(new Intent(this, RegisterActivity.class));
+        SessionManager.getInstance().clear();
+        startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
 
@@ -40,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder mydialogbuilder = new AlertDialog.Builder(MainActivity.this);
         mydialogbuilder
                 .setTitle("DATA")
-                .setMessage(getPerson().info())
+                .setMessage(SessionManager.getInstance().getPerson().info())
                 .setNegativeButton("Kembali", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
@@ -51,10 +48,5 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog mydialog = mydialogbuilder.create();
         mydialog.show();
-    }
-    private Person getPerson(){
-        Person person = new Person(sharedPreferences.getString(RegisterActivity.KEY_NAME,""), sharedPreferences.getString(RegisterActivity.KEY_EMAIL,""),
-                sharedPreferences.getString(RegisterActivity.KEY_ALAMAT,""),sharedPreferences.getInt(RegisterActivity.KEY_NO_TELP,0));
-        return person;
     }
 }

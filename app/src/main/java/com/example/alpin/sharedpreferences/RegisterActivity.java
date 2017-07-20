@@ -11,24 +11,11 @@ import android.widget.EditText;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText nama,email,alamat,notelp;
-    public static String KEY_NAME = "name";
-    public static String KEY_EMAIL = "email";
-    public static String KEY_ALAMAT = "alamat";
-    public static String KEY_NO_TELP = "notelp";
-    public static String PREFERENCE_NAME = "preference";
-    public static final String ISLOGGEDIN = "isloggedin";
 
-    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        sharedPreferences = getSharedPreferences(PREFERENCE_NAME, MODE_PRIVATE);
-
-        boolean isLoggedIn = sharedPreferences.getBoolean(ISLOGGEDIN, false);
-        Log.d("isloggedin", String.valueOf(isLoggedIn));
-        if (isLoggedIn) Home();
         setContentView(R.layout.activity_register);
 
 
@@ -37,36 +24,26 @@ public class RegisterActivity extends AppCompatActivity {
         email = (EditText) findViewById(R.id.et_email);
         alamat = (EditText) findViewById(R.id.et_alamat);
         notelp = (EditText) findViewById(R.id.et_noTelp);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
+    }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
     }
     public void submit(View view){
-        Person person = new Person(nama.getText().toString(), email.getText().toString(), alamat.getText().toString(),
+        Person per = new Person(nama.getText().toString(), email.getText().toString(), alamat.getText().toString(),
                 Integer.valueOf(notelp.getText().toString()));
-        setPerson(person);
-        Home();
-    }
-    private void setPerson(Person person){
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(KEY_NAME, person.getName());
-        editor.putString(KEY_EMAIL, person.getEmail());
-        editor.putString(KEY_ALAMAT, person.getAlamat());
-        editor.putInt(KEY_NO_TELP, person.getNoTelp());
-        editor.putBoolean(ISLOGGEDIN, true);
-        editor.commit();
+        if(per !=null) {
+            SessionManager.getInstance().setPerson(per);
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
     }
 
 
-    private Person getPerson(){
-        Person person = new Person(sharedPreferences.getString(KEY_NAME,""), sharedPreferences.getString(KEY_EMAIL,""),
-                sharedPreferences.getString(KEY_ALAMAT,""),sharedPreferences.getInt(KEY_NO_TELP,0));
-        return person;
-    }
-
-    private void Home() {
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
     }
     }
 
