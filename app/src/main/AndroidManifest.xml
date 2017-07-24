@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.alpin.sharedpreferences">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -27,7 +28,8 @@
         </activity>
         <activity android:name=".auth.LoginActivity" />
         <activity android:name=".Doa.DetailItemActivity" />
-        <activity android:name=".Doa.ItemActivity"></activity>
+        <activity android:name=".Doa.ItemActivity" />
+        <activity android:name=".Doa.DetailDoaActivity"></activity>
     </application>
 
 </manifest>

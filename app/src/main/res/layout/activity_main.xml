@@ -22,7 +22,7 @@
         android:layout_below="@+id/toolbar"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
-        android:layout_margin="3dp"
+        android:layout_margin="1dp"
         android:padding="5dp"
         />
 

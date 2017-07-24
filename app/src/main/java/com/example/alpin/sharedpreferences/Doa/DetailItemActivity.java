@@ -3,6 +3,7 @@ package com.example.alpin.sharedpreferences.Doa;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,6 +24,8 @@ public class DetailItemActivity extends AppCompatActivity {
     private ImageView imgFormDoa;
     private String path;
     private int id;
+    DatabaseHandler db;
+
 
     private final String TAG = DatabaseHandler.class.getSimpleName();
     private Doa doa = null;
@@ -98,22 +101,25 @@ public class DetailItemActivity extends AppCompatActivity {
     }
 
     public void submitSave(View view) {
-
+        db = DatabaseHandler.getInstance();
         String etnama, etdoa, etket;
         etnama = etNama.getText().toString();
         etdoa = etDoa.getText().toString();
         etket = etKet.getText().toString();
-
+        Doa doaa = new Doa(id, etnama, etdoa, etket, path);
         Intent returnIntent = new Intent();
         if (doa != null) {
-            returnIntent.putExtra("data_update", new Doa(id, etnama, etdoa, etket, path));
-            setResult(MainActivity.RESULT_UPDATE, returnIntent);
+           db.updateDoa(doaa);
+            startActivity(new Intent(this, MainActivity.class));
         }else{
-            returnIntent.putExtra("data_add", new Doa(etnama, etdoa, etket, path));
-            setResult(MainActivity.RESULT_ADD, returnIntent);
+            db.addDoa(doaa);
+            startActivity(new Intent(this, MainActivity.class));
         }
         finish();
         }
+    public void submitCancel(View view) {
+        finish();
+    }
     }
 
 

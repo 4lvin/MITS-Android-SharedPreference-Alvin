@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.alpin.sharedpreferences.Doa.DetailDoaActivity;
 import com.example.alpin.sharedpreferences.Doa.DetailItemActivity;
 import com.example.alpin.sharedpreferences.auth.LoginActivity;
 import com.example.alpin.sharedpreferences.model.Doa;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int RESULT_ADD = 2;
     public static final int RESULT_UPDATE = 3;
     private DatabaseHandler tblDoa;
-    private int pos;
+    private int pos = 1;
 
     private final String TAG = MainActivity.class.getSimpleName();
 
@@ -91,16 +92,21 @@ public class MainActivity extends AppCompatActivity {
                 new RecyclerTouchListener.ClickListener() {
                     @Override
                     public void onClick(View view, int position) {
+                        intent = new Intent(MainActivity.this, DetailDoaActivity.class);
+                        Doa doa = adapter.getItem(position);
+                        intent.putExtra("doa", doa);
+                       // pos = position;
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onLongClick(View view, int position) {
                         intent = new Intent(MainActivity.this, DetailItemActivity.class);
                         Doa doa = adapter.getItem(position);
 
                         intent.putExtra("doa", doa);
                         pos = position;
                         startActivityForResult(intent, RESULT_UPDATE);
-                    }
-
-                    @Override
-                    public void onLongClick(View view, int position) {
 
                     }
                 }));

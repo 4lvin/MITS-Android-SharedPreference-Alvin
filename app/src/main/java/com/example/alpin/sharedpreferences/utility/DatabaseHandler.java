@@ -153,9 +153,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_DOA, doa.getDoa());
         values.put(KEY_KET, doa.getKet());
         values.put(KEY_IMAGE, doa.getImageAddrees());
-        Log.d(TAG,"Update Succes !");
+
 
         sqLiteDatabase.update(TABLE_DOA, values, KEY_ID_DOA + " = '"+ doa.getId() +"'" , null);
+        Log.d(TAG,"Update Succes !");
     }
 
     public void deleteDoa(Doa doa) {
