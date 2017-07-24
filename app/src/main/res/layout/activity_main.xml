@@ -3,29 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="18dp"
-    tools:context="com.example.alpin.sharedpreferences.MainActivity">
+    android:layout_height="match_parent">
 
-    <Button
-        android:onClick="submit"
-        android:id="@+id/btn_logout"
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:titleTextColor="@android:color/white"
+        android:background="@color/colorPrimary">
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:layout_margin="3dp"
+        android:padding="5dp"
+        />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add"
+        android:onClick="submitAddMovie"
+        android:tint="#FFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="LOGOUT"
-        android:layout_marginLeft="250dp"/>
-    <Button
-        android:id="@+id/btn_submit"
-    android:onClick="doSubmit"
-        android:layout_marginTop="100dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-        android:text="See Data"/>
-    <TextView
-        android:id="@+id/tv_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
- />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_edit_black_24dp"/>
 
 </RelativeLayout>
+

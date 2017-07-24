@@ -1,7 +1,9 @@
-package com.example.alpin.sharedpreferences;
+package com.example.alpin.sharedpreferences.utility;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import com.example.alpin.sharedpreferences.model.Person;
 
 /**
  * Created by alpin on 19/07/17.
@@ -45,6 +47,7 @@ public class SessionManager {
     }
 
     public Person getPerson(){
+        DatabaseHandler db = DatabaseHandler.getInstance();
         Person person = new Person(preferences.getString(KEY_NAME,""),
                 preferences.getString(KEY_EMAIL,""),preferences.getString(KEY_ALAMAT,""),
                 preferences.getInt(KEY_NO_TELP,0));

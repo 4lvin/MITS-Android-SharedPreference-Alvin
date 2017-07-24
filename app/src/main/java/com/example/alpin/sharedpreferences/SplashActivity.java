@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.alpin.sharedpreferences.auth.LoginActivity;
+import com.example.alpin.sharedpreferences.utility.SessionManager;
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override

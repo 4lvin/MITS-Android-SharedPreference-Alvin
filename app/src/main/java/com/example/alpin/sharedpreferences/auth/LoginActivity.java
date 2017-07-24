@@ -1,20 +1,28 @@
-package com.example.alpin.sharedpreferences;
+package com.example.alpin.sharedpreferences.auth;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.alpin.sharedpreferences.MainActivity;
+import com.example.alpin.sharedpreferences.R;
+import com.example.alpin.sharedpreferences.model.Person;
+import com.example.alpin.sharedpreferences.utility.DatabaseHandler;
+import com.example.alpin.sharedpreferences.utility.SessionManager;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText etEmail, etPass;
     private TextView tvResult;
+    private final String TAG = RegisterActivity.class.getSimpleName();
 
 
     private SessionManager sessionManager;
-
+    DatabaseHandler db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,10 +32,18 @@ public class LoginActivity extends AppCompatActivity {
 
         etEmail = (EditText) findViewById(R.id.et_email);
         etPass = (EditText) findViewById(R.id.et_pass);
+        db = DatabaseHandler.getInstance();
+        for (Person person : db.getAllUser()){
+            Log.d(TAG, "data : " + person.toString());
+
+        }
+
 
     }
 
     public void login(View view){
+
+
         String email = etEmail.getText().toString();
         String pass = etPass.getText().toString();
 
@@ -43,17 +59,26 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        if(etEmail.getText().toString().equalsIgnoreCase(sessionManager.getPerson().getEmail())
-                && etPass.getText().toString().equalsIgnoreCase(sessionManager.getPerson().getPassword())
-                ){
+        for (Person person : db.getAllUser()) {
+            Log.d(TAG, person.toString());
+            if(email.equalsIgnoreCase(person.getEmail())
+                    && pass.equalsIgnoreCase(person.getPassword())
+                    ) {
+                sessionManager.setLogin(true);
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+            }
 
-            sessionManager.setLogin(true);
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
+
         }
-    }
+
+/*           {
+
+        }*/
+
 
     public void register(View view){
         startActivity(new Intent(this, RegisterActivity.class));

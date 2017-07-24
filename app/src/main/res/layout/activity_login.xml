@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="20dp"
-    tools:context="com.example.alpin.sharedpreferences.LoginActivity">
+    tools:context="com.example.alpin.sharedpreferences.auth.LoginActivity">
 
     <EditText
         android:id="@+id/et_email"
@@ -27,6 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:onClick="login"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
         android:text="login"/>
     <TextView
         android:id="@+id/tv_signup"
@@ -35,5 +37,7 @@
         android:layout_height="wrap_content"
         android:text="Not a member? Sign Up now"
         android:layout_gravity="center"
+        android:textSize="7pt"
+        android:textColor="@android:color/holo_blue_dark"
         android:layout_marginTop="50dp"/>
 </LinearLayout>
