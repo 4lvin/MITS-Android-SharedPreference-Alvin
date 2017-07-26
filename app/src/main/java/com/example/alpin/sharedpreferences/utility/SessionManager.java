@@ -42,7 +42,6 @@ public class SessionManager {
         editor.putString(KEY_EMAIL, person.getEmail());
         editor.putString(KEY_ALAMAT, person.getPassword());
         editor.putInt(KEY_NO_TELP, person.getNoTelp());
-        setLogin(true);
         editor.commit();
     }
 
@@ -54,8 +53,10 @@ public class SessionManager {
         return person;
     }
 
-    public void setLogin(boolean isLogin){
-        editor.putBoolean(ISLOGGEDIN, isLogin);
+    public void setLogin(String email, String pass) {
+        editor.putString(KEY_EMAIL, email);
+        editor.putString(KEY_ALAMAT, pass);
+        editor.putBoolean(ISLOGGEDIN, true);
         editor.commit();
     }
 

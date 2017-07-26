@@ -27,7 +27,7 @@ public class DetailItemActivity extends AppCompatActivity {
     DatabaseHandler db;
 
 
-    private final String TAG = DatabaseHandler.class.getSimpleName();
+    private final String TAG = DetailDoaActivity.class.getSimpleName();
     private Doa doa = null;
 
     @Override
@@ -51,7 +51,6 @@ public class DetailItemActivity extends AppCompatActivity {
             Glide.with(DetailItemActivity.this).load(doa.getImageAddrees()).into(imgFormDoa);
         } else getSupportActionBar().setTitle("Add Data");
     }
-
 
 
     @Override
@@ -109,17 +108,18 @@ public class DetailItemActivity extends AppCompatActivity {
         Doa doaa = new Doa(id, etnama, etdoa, etket, path);
         Intent returnIntent = new Intent();
         if (doa != null) {
-           db.updateDoa(doaa);
+            db.updateDoa(doaa);
             startActivity(new Intent(this, MainActivity.class));
-        }else{
+        } else {
             db.addDoa(doaa);
             startActivity(new Intent(this, MainActivity.class));
         }
         finish();
-        }
+    }
+
     public void submitCancel(View view) {
         finish();
     }
-    }
+}
 
 

@@ -168,4 +168,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void deleteDoaById(int id) {
         sqLiteDatabase.execSQL("DELETE FROM "+TABLE_DOA+" WHERE "+KEY_ID_DOA+" = "+id);
     }
+
+    public boolean checkUser(String email, String pass){
+        String selectQuery = "SELECT * FROM " + TABLE_PERSON + " WHERE " + KEY_EMAIL + " = '" + email
+                + "' AND " + KEY_PASS  + " = '" + pass +"'";
+
+        Cursor cursor = sqLiteDatabase.rawQuery(selectQuery, null);
+        return cursor.moveToFirst();
+    }
 }

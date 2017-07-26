@@ -26,7 +26,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView tvResult;
     private DoaAdapter adapter;
     private RecyclerView recyclerView;
     private Intent intent;
@@ -35,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseHandler tblDoa;
     private int pos = 1;
 
-    private final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
