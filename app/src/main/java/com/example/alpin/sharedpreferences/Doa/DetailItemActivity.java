@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -96,17 +97,39 @@ public class DetailItemActivity extends AppCompatActivity {
                     .centerCrop()
                     .into(imgFormDoa);
             path = imageFile.getAbsolutePath();
+            Log.d(TAG, "onPhotoReturned: "+path);
         }
     }
 
     public void submitSave(View view) {
+        String etnama, etdoa, etket, imgDoa;
         db = DatabaseHandler.getInstance();
-        String etnama, etdoa, etket;
+
         etnama = etNama.getText().toString();
         etdoa = etDoa.getText().toString();
         etket = etKet.getText().toString();
-        Doa doaa = new Doa(id, etnama, etdoa, etket, path);
-        Intent returnIntent = new Intent();
+        imgDoa = path;
+
+        if (path == null) {
+            imgDoa = doa.getImageAddrees();
+        }
+
+        if (etnama.isEmpty()) {
+            etNama.setError("please insert name Doa");
+            etNama.requestFocus();
+            return;
+        }
+        if (etdoa.isEmpty()) {
+            etDoa.setError("please insert Doa");
+            etDoa.requestFocus();
+            return;
+        }
+        if (etket.isEmpty()) {
+            etKet.setError("please insert Keterangan");
+            etKet.requestFocus();
+            return;
+        }
+        Doa doaa = new Doa(id, etnama, etdoa, etket, imgDoa);
         if (doa != null) {
             db.updateDoa(doaa);
             startActivity(new Intent(this, MainActivity.class));

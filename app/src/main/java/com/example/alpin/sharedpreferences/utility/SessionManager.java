@@ -41,7 +41,7 @@ public class SessionManager {
         editor.putString(KEY_NAME, person.getName());
         editor.putString(KEY_EMAIL, person.getEmail());
         editor.putString(KEY_ALAMAT, person.getPassword());
-        editor.putInt(KEY_NO_TELP, person.getNoTelp());
+        editor.putString(KEY_NO_TELP, person.getNoTelp());
         editor.commit();
     }
 
@@ -49,7 +49,7 @@ public class SessionManager {
         DatabaseHandler db = DatabaseHandler.getInstance();
         Person person = new Person(preferences.getString(KEY_NAME,""),
                 preferences.getString(KEY_EMAIL,""),preferences.getString(KEY_ALAMAT,""),
-                preferences.getInt(KEY_NO_TELP,0));
+                preferences.getString(KEY_NO_TELP,""));
         return person;
     }
 

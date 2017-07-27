@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         tblDoa = DatabaseHandler.getInstance();
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
+
     }
 
     @Override

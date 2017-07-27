@@ -20,7 +20,7 @@ import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 11;
+    private static final int DATABASE_VERSION = 12;
     private static final String DATABSE_NAME = "db_person";
 
     private static final String TABLE_PERSON = "person";
@@ -72,7 +72,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_NAME + " TEXT,"
                 + KEY_EMAIL + " TEXT,"
                 + KEY_PASS + " TEXT,"
-                + KEY_NO_HP + " INTEGER" + ")";
+                + KEY_NO_HP + " TEXT" + ")";
 
         sqLiteDatabase.execSQL(CREATE_TABLE_PERSON);
 
@@ -120,7 +120,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 person.setName(cursor.getString(1));
                 person.setEmail(cursor.getString(2));
                 person.setPassword(cursor.getString(3));
-                person.setNoTelp(cursor.getInt(4));
+                person.setNoTelp(cursor.getString(4));
                 persons.add(person);
             } while (cursor.moveToNext());
         }

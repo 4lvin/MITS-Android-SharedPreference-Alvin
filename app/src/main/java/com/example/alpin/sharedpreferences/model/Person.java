@@ -5,14 +5,14 @@ package com.example.alpin.sharedpreferences.model;
  */
 
 public class Person {
-    private String name, email, password;
-    private int noTelp, id;
+    private String name, email, password, noTelp;
+    private int id;
 
 
     public Person() {
     }
 
-    public Person(String name, String email, String password, int noTelp) {
+    public Person(String name, String email, String password, String noTelp) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -43,11 +43,11 @@ public class Person {
         this.password = password;
     }
 
-    public int getNoTelp() {
+    public String getNoTelp() {
         return noTelp;
     }
 
-    public void setNoTelp(int noTelp) {
+    public void setNoTelp(String noTelp) {
         this.noTelp = noTelp;
     }
 

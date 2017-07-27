@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 
@@ -14,7 +15,7 @@ import com.example.alpin.sharedpreferences.utility.SessionManager;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText nama, email, alamat, notelp;
+    private EditText nama, email, etPass, notelp;
     private final String TAG = RegisterActivity.class.getSimpleName();
 
     @Override
@@ -25,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         nama = (EditText) findViewById(R.id.et_name);
         email = (EditText) findViewById(R.id.et_email);
-        alamat = (EditText) findViewById(R.id.et_alamat);
+        etPass = (EditText) findViewById(R.id.et_alamat);
         notelp = (EditText) findViewById(R.id.et_noTelp);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -41,28 +42,35 @@ public class RegisterActivity extends AppCompatActivity {
     public void submit(View view) {
         DatabaseHandler db = DatabaseHandler.getInstance();
 
-        String etNama, etEmail, etAlamat;
+        String etNama, etEmail, etPassword, noTelp;
         etNama = nama.getText().toString();
         etEmail = email.getText().toString();
-        etAlamat = alamat.getText().toString();
+        etPassword = etPass.getText().toString();
+        noTelp = notelp.getText().toString();
 
         if (etNama.isEmpty()) {
             nama.setError("Please insert name !");
             nama.requestFocus();
             return;
         }
-        if (etEmail.isEmpty()) {
+        if (!Patterns.EMAIL_ADDRESS.matcher(etEmail).matches()) {
             email.setError("Please insert email !");
             email.requestFocus();
             return;
         }
-        if (etAlamat.isEmpty()) {
-            alamat.setError("Please insert Address !");
-            alamat.requestFocus();
+        if (etPassword.length() < 8) {
+            etPass.setError("Please insert Password !");
+            etPass.requestFocus();
             return;
         }
-        Person per = new Person(nama.getText().toString(), email.getText().toString(), alamat.getText().toString(),
-                Integer.valueOf(notelp.getText().toString()));
+        if (noTelp.isEmpty()) {
+            etPass.setError("Please insert No.Telp !");
+            etPass.requestFocus();
+            return;
+        }
+
+        Person per = new Person(nama.getText().toString(), email.getText().toString(),
+                etPass.getText().toString(), notelp.getText().toString());
 
         db.addUser(per);
         SessionManager.getInstance().setPerson(per);
