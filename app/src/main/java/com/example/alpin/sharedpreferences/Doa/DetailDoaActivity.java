@@ -2,7 +2,6 @@ package com.example.alpin.sharedpreferences.Doa;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,7 +30,6 @@ public class DetailDoaActivity extends AppCompatActivity {
         doa = getIntent().getParcelableExtra("doa");
         if (doa != null) {
             getSupportActionBar().setTitle(doa.getNama());
-            id = doa.getId();
             tv_nama.setText(doa.getNama());
             tv_doa.setText(doa.getDoa());
             tv_ket.setText(doa.getKet());

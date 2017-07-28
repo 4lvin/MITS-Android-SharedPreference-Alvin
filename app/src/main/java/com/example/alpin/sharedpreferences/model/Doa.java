@@ -3,13 +3,29 @@ package com.example.alpin.sharedpreferences.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
+import com.activeandroid.query.Update;
+
+import java.util.List;
+
 /**
  * Created by alpin on 23/07/17.
  */
 
-public class Doa implements Parcelable {
-    String nama,doa,ket,imageAddrees;
-    int id;
+@Table(name = "Doa")
+public class Doa extends Model implements Parcelable {
+    @Column(name = "Nama")
+    String nama;
+    @Column(name = "Doa")
+    String doa;
+    @Column(name = "Ket")
+    String ket;
+    @Column(name = "Image")
+    String imageAddrees;
+
 
     public Doa() {
     }
@@ -21,21 +37,12 @@ public class Doa implements Parcelable {
         this.imageAddrees = imageAddrees;
     }
 
-    public Doa(int id,String nama, String doa, String ket, String imageAddrees ) {
-        this.id = id;
-        this.nama = nama;
-        this.doa = doa;
-        this.ket = ket;
-        this.imageAddrees = imageAddrees;
-
-    }
 
     protected Doa(Parcel in) {
         nama = in.readString();
         doa = in.readString();
         ket = in.readString();
         imageAddrees = in.readString();
-        id = in.readInt();
     }
 
     public static final Creator<Doa> CREATOR = new Creator<Doa>() {
@@ -82,13 +89,6 @@ public class Doa implements Parcelable {
         this.imageAddrees = imageAddrees;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     @Override
     public int describeContents() {
@@ -101,6 +101,19 @@ public class Doa implements Parcelable {
         parcel.writeString(doa);
         parcel.writeString(ket);
         parcel.writeString(imageAddrees);
-        parcel.writeInt(id);
+    }
+
+    public static List<Doa> getAll() {
+        return new Select().from(Doa.class)
+                .orderBy("Id DESC")
+                .execute();
+    }
+
+    public static void updateDoa(long id, Doa doa) {
+        new Update(Doa.class)
+                .set("title = ?, genre = ?, year = ?, country = ?, duration = ?, imageaddress = ?",
+                        doa.getNama(), doa.getDoa(), doa.getKet(), doa.getImageAddrees())
+                .where("Id = ? ", id)
+                .execute();
     }
 }

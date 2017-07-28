@@ -3,7 +3,7 @@ package com.example.alpin.sharedpreferences.utility;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.alpin.sharedpreferences.model.Person;
+import com.example.alpin.sharedpreferences.model.User;
 
 /**
  * Created by alpin on 19/07/17.
@@ -37,7 +37,7 @@ public class SessionManager {
         return instance;
     }
 
-    public void setPerson(Person person){
+    public void setUser(User person){
         editor.putString(KEY_NAME, person.getName());
         editor.putString(KEY_EMAIL, person.getEmail());
         editor.putString(KEY_ALAMAT, person.getPassword());
@@ -45,19 +45,22 @@ public class SessionManager {
         editor.commit();
     }
 
-    public Person getPerson(){
-        DatabaseHandler db = DatabaseHandler.getInstance();
-        Person person = new Person(preferences.getString(KEY_NAME,""),
-                preferences.getString(KEY_EMAIL,""),preferences.getString(KEY_ALAMAT,""),
-                preferences.getString(KEY_NO_TELP,""));
-        return person;
-    }
 
     public void setLogin(String email, String pass) {
         editor.putString(KEY_EMAIL, email);
         editor.putString(KEY_ALAMAT, pass);
         editor.putBoolean(ISLOGGEDIN, true);
         editor.commit();
+    }
+
+    public String getEmail(){
+        String email = preferences.getString(KEY_EMAIL, "");
+        return email;
+    }
+
+    public String getPass(){
+        String password = preferences.getString(KEY_ALAMAT, "");
+        return password;
     }
 
     public  boolean isLogin(){

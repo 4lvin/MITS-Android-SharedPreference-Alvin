@@ -1,6 +1,5 @@
 package com.example.alpin.sharedpreferences.auth;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,9 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.alpin.sharedpreferences.R;
-import com.example.alpin.sharedpreferences.model.Person;
-import com.example.alpin.sharedpreferences.utility.DatabaseHandler;
-import com.example.alpin.sharedpreferences.utility.SessionManager;
+import com.example.alpin.sharedpreferences.model.User;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -40,7 +37,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void submit(View view) {
-        DatabaseHandler db = DatabaseHandler.getInstance();
 
         String etNama, etEmail, etPassword, noTelp;
         etNama = nama.getText().toString();
@@ -69,7 +65,19 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        Person per = new Person(nama.getText().toString(), email.getText().toString(),
+        User user = new User();
+        user.setName(etNama);
+        user.setEmail(etEmail);
+        user.setPassword(etPassword);
+        user.setNoTelp(noTelp);
+        user.save();
+
+        for (User user1 : User.getAll()) {
+            Log.d(TAG, "data : " + user1.toString());
+        }
+
+
+       /* Person per = new Person(nama.getText().toString(), email.getText().toString(),
                 etPass.getText().toString(), notelp.getText().toString());
 
         db.addUser(per);
@@ -79,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
         for (Person person : db.getAllUser()) {
             Log.d(TAG, "data : " + person.toString());
 
-        }
+        }*/
     }
 
 

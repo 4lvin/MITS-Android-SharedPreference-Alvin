@@ -3,7 +3,6 @@ package com.example.alpin.sharedpreferences.Doa;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -13,7 +12,6 @@ import com.bumptech.glide.Glide;
 import com.example.alpin.sharedpreferences.MainActivity;
 import com.example.alpin.sharedpreferences.R;
 import com.example.alpin.sharedpreferences.model.Doa;
-import com.example.alpin.sharedpreferences.utility.DatabaseHandler;
 
 import java.io.File;
 
@@ -25,7 +23,6 @@ public class DetailItemActivity extends AppCompatActivity {
     private ImageView imgFormDoa;
     private String path;
     private int id;
-    DatabaseHandler db;
 
 
     private final String TAG = DetailDoaActivity.class.getSimpleName();
@@ -45,7 +42,6 @@ public class DetailItemActivity extends AppCompatActivity {
         doa = getIntent().getParcelableExtra("doa");
         if (doa != null) {
             getSupportActionBar().setTitle("Update Data");
-            id = doa.getId();
             etNama.setText(doa.getNama());
             etDoa.setText(doa.getDoa());
             etKet.setText(doa.getKet());
@@ -103,12 +99,12 @@ public class DetailItemActivity extends AppCompatActivity {
 
     public void submitSave(View view) {
         String etnama, etdoa, etket, imgDoa;
-        db = DatabaseHandler.getInstance();
 
         etnama = etNama.getText().toString();
         etdoa = etDoa.getText().toString();
         etket = etKet.getText().toString();
         imgDoa = path;
+
 
         if (path == null) {
             imgDoa = doa.getImageAddrees();
@@ -129,13 +125,13 @@ public class DetailItemActivity extends AppCompatActivity {
             etKet.requestFocus();
             return;
         }
-        Doa doaa = new Doa(id, etnama, etdoa, etket, imgDoa);
+        Intent returnIntent = new Intent();
         if (doa != null) {
-            db.updateDoa(doaa);
-            startActivity(new Intent(this, MainActivity.class));
+            returnIntent.putExtra("data_update", new Doa(etnama, etdoa, etket, imgDoa));
+            setResult(MainActivity.RESULT_UPDATE, returnIntent);
         } else {
-            db.addDoa(doaa);
-            startActivity(new Intent(this, MainActivity.class));
+            returnIntent.putExtra("data_add", new Doa(etnama, etdoa, etket, imgDoa));
+            setResult(MainActivity.RESULT_ADD, returnIntent);
         }
         finish();
     }

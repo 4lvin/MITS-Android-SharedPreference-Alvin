@@ -7,17 +7,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import com.example.alpin.sharedpreferences.Doa.DetailDoaActivity;
 import com.example.alpin.sharedpreferences.Doa.DetailItemActivity;
-import com.example.alpin.sharedpreferences.auth.LoginActivity;
-import com.example.alpin.sharedpreferences.model.Doa;
-import com.example.alpin.sharedpreferences.utility.DatabaseHandler;
 import com.example.alpin.sharedpreferences.Doa.DoaAdapter;
+import com.example.alpin.sharedpreferences.model.Doa;
+//import com.example.alpin.sharedpreferences.model.Doa.DetailDoaActivity;
+//import com.example.alpin.sharedpreferences.model.Doa.DetailItemActivity;
+import com.example.alpin.sharedpreferences.auth.LoginActivity;
+//import com.example.alpin.sharedpreferences.model.Doa.DoaAdapter;
+import com.example.alpin.sharedpreferences.model.User;
 import com.example.alpin.sharedpreferences.utility.SessionManager;
 import com.example.alpin.sharedpreferences.utility.SpacesItemDecoration;
 import com.example.alpin.sharedpreferences.utility.recycler.RecyclerTouchListener;
@@ -31,9 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private Intent intent;
     public static final int RESULT_ADD = 2;
     public static final int RESULT_UPDATE = 3;
-    private DatabaseHandler tblDoa;
     private int pos = 1;
-
+    private long id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
         topToolBar.setLogoDescription(getResources().getString(R.string.app_name));
 
 
-        tblDoa = DatabaseHandler.getInstance();
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
 
@@ -75,13 +76,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    protected void onResume() {
-        super.onResume();
-        initRecyclerView();
-    }
+
 
     public void initRecyclerView() {
-        List<Doa> list = tblDoa.getAllDoa();
+        List<Doa> list = Doa.getAll();
         adapter = new DoaAdapter(MainActivity.this, list);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -126,14 +124,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
             int position = viewHolder.getAdapterPosition();
-            tblDoa.deleteDoaById(adapter.getItem(position).getId());
+            Doa doa = adapter.getItem(position);
+            doa.delete();
             adapter.remove(position);
-
         }
     };
 
 
-    public void submitAddMovie(View view) {
+    public void submitAddDoa(View view) {
         Intent intent = new Intent(this, DetailItemActivity.class);
         startActivityForResult(intent, RESULT_ADD);
     }
@@ -142,14 +140,15 @@ public class MainActivity extends AppCompatActivity {
 
         if (resultCode == RESULT_ADD) {
             Doa doa = data.getParcelableExtra("data_add");
-            tblDoa.addDoa(doa);
+            doa.save();
             adapter.insert(doa);
             recyclerView.scrollToPosition(0);
         } else if (resultCode == RESULT_UPDATE) {
             Doa doa = data.getParcelableExtra("data_update");
-            tblDoa.updateDoa(new Doa(doa.getId(), doa.getNama(), doa.getDoa(),
-                    doa.getKet(), doa.getImageAddrees()));
+            Doa.updateDoa(id, doa);
+            Log.d("id : " + doa.getId(), " image : " + doa.getImageAddrees());
             adapter.update(pos, doa);
+            adapter.notifyDataSetChanged();
             recyclerView.scrollToPosition(0);
         }
     }
