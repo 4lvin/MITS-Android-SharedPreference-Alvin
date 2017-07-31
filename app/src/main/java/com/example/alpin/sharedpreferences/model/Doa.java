@@ -26,6 +26,7 @@ public class Doa extends Model implements Parcelable {
     @Column(name = "Image")
     String image;
 
+
 /*
 
     int imageAdrees;
@@ -37,6 +38,7 @@ public class Doa extends Model implements Parcelable {
         this.imageAdrees = imageAdrees;
     }
 */
+
 
     public Doa() {
         super();
@@ -121,15 +123,32 @@ public class Doa extends Model implements Parcelable {
 
     public static List<Doa> getAll() {
         return new Select().from(Doa.class)
-                .orderBy("Id DESC")
+                .orderBy("Id ASC")
                 .execute();
     }
 
     public static void updateDoa(long id, Doa doa) {
         new Update(Doa.class)
-                .set("nama = ?, doa = ?, ket = ?, imageAddrees = ?",
+                .set("nama = ?, doa = ?, ket = ?, image = ?",
                         doa.getNama(), doa.getDoa(), doa.getKet(), doa.getImage())
                 .where("Id = ? ", id)
                 .execute();
+    }
+
+    public static List<Doa> searchDoa(){
+        return new Select().from(Doa.class)
+                .where("nama = ? ", "Doa sebelum makan")
+                .orderBy("Id ASC")
+                .execute();
+    }
+
+    @Override
+    public String toString() {
+        return "Doa{" +
+                "nama='" + nama + '\'' +
+                ", doa='" + doa + '\'' +
+                ", ket='" + ket + '\'' +
+                ", image='" + image + '\'' +
+                '}';
     }
 }

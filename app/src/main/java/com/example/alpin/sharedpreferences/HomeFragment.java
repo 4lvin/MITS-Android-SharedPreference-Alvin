@@ -24,6 +24,7 @@ import com.example.alpin.sharedpreferences.model.Doa;
 import com.example.alpin.sharedpreferences.utility.SpacesItemDecoration;
 import com.example.alpin.sharedpreferences.utility.recycler.RecyclerTouchListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
@@ -44,14 +45,18 @@ public class HomeFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recycler_view);
         initRecyclerView();
-
-    /*    List<Doa> list1;
+        for (Doa doa : Doa.searchDoa()) {
+            Log.d("tag", "data : " + doa.toString());
+        }
+/*
+        List<Doa> list1;
         list1 = new ArrayList<>();
 
         list1.add(new Doa("Doa sebelum makan", "bismillahirrohmanirrohim", "baca 1x",
                 R.drawable.ic_home_black_24dp));
 
-        adapter = new DoaAdapter(list1);*/
+        adapter = new DoaAdapter(list1);
+*/
 
         FloatingActionButton btnSave = view.findViewById(R.id.add);
         btnSave.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +137,7 @@ public class HomeFragment extends Fragment {
             recyclerView.scrollToPosition(0);
         } else if (resultCode == RESULT_UPDATE) {
             Doa doa = data.getParcelableExtra("data_update");
-//            Doa.updateDoa(id, doa);
+            Doa.updateDoa(id, doa);
             Log.d("id : " + doa.getId(), " image : " + doa.getImage());
             adapter.update(pos, doa);
             adapter.notifyDataSetChanged();

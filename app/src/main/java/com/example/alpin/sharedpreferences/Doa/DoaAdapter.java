@@ -24,8 +24,8 @@ public class DoaAdapter extends RecyclerView.Adapter<DoaAdapter.MyViewHolder> {
     private Context context;
 
     class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView name;
-        ImageView image;
+        TextView name,name1;
+        ImageView image,image1;
 
         public MyViewHolder(View itemView) {
             super(itemView);

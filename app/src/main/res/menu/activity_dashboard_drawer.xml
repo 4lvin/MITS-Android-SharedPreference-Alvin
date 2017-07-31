@@ -8,16 +8,16 @@
             android:title="Home" />
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Doa" />
+            android:icon="@drawable/zikir"
+            android:title="Zikir pagi" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:icon="@drawable/zikir"
+            android:title="Zikir petang" />
         <item
             android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:icon="@drawable/zikir"
+            android:title="zikir sesudah sholat fardhu" />
     </group>
 
     <item android:title="Communicate">
@@ -25,7 +25,7 @@
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="Abaout" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_exit_to_app_black_24dp"

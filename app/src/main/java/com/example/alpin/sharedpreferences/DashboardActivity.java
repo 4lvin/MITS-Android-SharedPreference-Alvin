@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
+import com.example.alpin.sharedpreferences.auth.AboutFragment;
 import com.example.alpin.sharedpreferences.auth.LoginActivity;
 import com.example.alpin.sharedpreferences.utility.SessionManager;
 
@@ -80,8 +81,17 @@ public class DashboardActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             openHome();
+        } else if (id == R.id.nav_gallery) {
 
+        } else if (id == R.id.nav_slideshow) {
 
+        } else if (id == R.id.nav_manage) {
+
+        } else if (id == R.id.nav_share) {
+            AboutFragment aboutFragment = new AboutFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.mainLayout, aboutFragment)
+                    .commit();
         } else if (id == R.id.nav_send) {
             SessionManager.getInstance().clear();
             startActivity(new Intent(this, LoginActivity.class));
