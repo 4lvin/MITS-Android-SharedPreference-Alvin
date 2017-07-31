@@ -1,5 +1,6 @@
 package com.example.alpin.sharedpreferences.auth;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -71,7 +72,8 @@ public class RegisterActivity extends AppCompatActivity {
         user.setPassword(etPassword);
         user.setNoTelp(noTelp);
         user.save();
-
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
         for (User user1 : User.getAll()) {
             Log.d(TAG, "data : " + user1.toString());
         }

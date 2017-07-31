@@ -13,24 +13,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="AA_DB_NAME"
             android:value="doaharian.db" />
-
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="2" />
-
+            android:value="5" />
         <meta-data
             android:name="AA_MODELS"
             android:value="com.example.alpin.sharedpreferences.model.User,
-                            com.example.alpin.sharedpreferences.model.Doa" />
+            com.example.alpin.sharedpreferences.model.Doa" />
 
-
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".auth.RegisterActivity" />
         <activity
             android:name=".SplashActivity"
@@ -44,7 +37,12 @@
         <activity android:name=".auth.LoginActivity" />
         <activity android:name=".Doa.DetailItemActivity" />
         <activity android:name=".Doa.ItemActivity" />
-        <activity android:name=".Doa.DetailDoaActivity"></activity>
+        <activity android:name=".Doa.DetailDoaActivity" />
+        <activity
+            android:name=".DashboardActivity"
+            android:label="@string/title_activity_dashboard"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>

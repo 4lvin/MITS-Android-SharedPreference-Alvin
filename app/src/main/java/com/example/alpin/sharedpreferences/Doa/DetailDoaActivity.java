@@ -33,7 +33,7 @@ public class DetailDoaActivity extends AppCompatActivity {
             tv_nama.setText(doa.getNama());
             tv_doa.setText(doa.getDoa());
             tv_ket.setText(doa.getKet());
-            Glide.with(DetailDoaActivity.this).load(doa.getImageAddrees()).into(imgDoa);
+            Glide.with(DetailDoaActivity.this).load(doa.getImage()).into(imgDoa);
         }
     }
     @Override

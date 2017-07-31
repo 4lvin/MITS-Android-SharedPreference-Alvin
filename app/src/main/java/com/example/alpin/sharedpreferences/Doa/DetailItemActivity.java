@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.example.alpin.sharedpreferences.MainActivity;
+import com.example.alpin.sharedpreferences.HomeFragment;
 import com.example.alpin.sharedpreferences.R;
 import com.example.alpin.sharedpreferences.model.Doa;
 
@@ -22,7 +22,7 @@ public class DetailItemActivity extends AppCompatActivity {
     private EditText etNama, etDoa, etKet;
     private ImageView imgFormDoa;
     private String path;
-    private int id;
+    private long id;
 
 
     private final String TAG = DetailDoaActivity.class.getSimpleName();
@@ -45,7 +45,7 @@ public class DetailItemActivity extends AppCompatActivity {
             etNama.setText(doa.getNama());
             etDoa.setText(doa.getDoa());
             etKet.setText(doa.getKet());
-            Glide.with(DetailItemActivity.this).load(doa.getImageAddrees()).into(imgFormDoa);
+            Glide.with(DetailItemActivity.this).load(doa.getImage()).into(imgFormDoa);
         } else getSupportActionBar().setTitle("Add Data");
     }
 
@@ -93,7 +93,7 @@ public class DetailItemActivity extends AppCompatActivity {
                     .centerCrop()
                     .into(imgFormDoa);
             path = imageFile.getAbsolutePath();
-            Log.d(TAG, "onPhotoReturned: "+path);
+            Log.d(TAG, "onPhotoReturned: " + path);
         }
     }
 
@@ -107,7 +107,7 @@ public class DetailItemActivity extends AppCompatActivity {
 
 
         if (path == null) {
-            imgDoa = doa.getImageAddrees();
+            imgDoa = doa.getImage();
         }
 
         if (etnama.isEmpty()) {
@@ -128,10 +128,10 @@ public class DetailItemActivity extends AppCompatActivity {
         Intent returnIntent = new Intent();
         if (doa != null) {
             returnIntent.putExtra("data_update", new Doa(etnama, etdoa, etket, imgDoa));
-            setResult(MainActivity.RESULT_UPDATE, returnIntent);
+            setResult(HomeFragment.RESULT_UPDATE, returnIntent);
         } else {
-            returnIntent.putExtra("data_add", new Doa(etnama, etdoa, etket, imgDoa));
-            setResult(MainActivity.RESULT_ADD, returnIntent);
+            returnIntent.putExtra("data_add", new Doa(etnama, etdoa, etket, path));
+            setResult(HomeFragment.RESULT_ADD, returnIntent);
         }
         finish();
     }

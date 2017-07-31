@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Configuration;
+import com.example.alpin.sharedpreferences.model.Doa;
 import com.example.alpin.sharedpreferences.model.User;
 import com.example.alpin.sharedpreferences.utility.SessionManager;
 
@@ -19,7 +20,7 @@ public class MyApp extends Application {
         SessionManager.init(this);
         //DatabaseHandler.init(this);
         Configuration.Builder confiBuilder = new Configuration.Builder(this);
-        confiBuilder.addModelClasses(User.class);
+        confiBuilder.addModelClasses(User.class, Doa.class);
         ActiveAndroid.initialize(this);
     }
 }

@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.alpin.sharedpreferences.MainActivity;
+import com.example.alpin.sharedpreferences.DashboardActivity;
 import com.example.alpin.sharedpreferences.R;
 import com.example.alpin.sharedpreferences.model.User;
 import com.example.alpin.sharedpreferences.utility.SessionManager;
@@ -58,12 +58,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-public void register(View view){
-        startActivity(new Intent(this,RegisterActivity.class));
-        }
+    public void register(View view) {
+        startActivity(new Intent(this, RegisterActivity.class));
+    }
+
     private void openDashboard() {
-        Intent data = new Intent(this, MainActivity.class);
+        Intent data = new Intent(this, DashboardActivity.class);
         startActivity(data);
         finish();
     }
-        }
+}

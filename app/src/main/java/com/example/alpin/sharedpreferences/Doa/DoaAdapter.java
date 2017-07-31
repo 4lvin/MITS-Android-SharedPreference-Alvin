@@ -30,11 +30,10 @@ public class DoaAdapter extends RecyclerView.Adapter<DoaAdapter.MyViewHolder> {
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            name = (TextView) itemView.findViewById(R.id.tv_name);
-            image = (ImageView) itemView.findViewById(R.id.img_doa);
+            name = itemView.findViewById(R.id.tv_name);
+            image = itemView.findViewById(R.id.img_doa);
         }
     }
-
     public DoaAdapter(Context context, List<Doa> dataset){
         this.context = context;
         this.dataset = dataset;
@@ -52,7 +51,7 @@ public class DoaAdapter extends RecyclerView.Adapter<DoaAdapter.MyViewHolder> {
         Doa doa = dataset.get(position);
 
         holder.name.setText(doa.getNama());
-        Glide.with(context).load(doa.getImageAddrees()).into(holder.image);
+        Glide.with(context).load(doa.getImage()).into(holder.image);
     }
 
     @Override

@@ -24,31 +24,47 @@ public class Doa extends Model implements Parcelable {
     @Column(name = "Ket")
     String ket;
     @Column(name = "Image")
-    String imageAddrees;
+    String image;
 
+/*
 
-    public Doa() {
-    }
+    int imageAdrees;
 
-    public Doa(String nama, String doa, String ket, String imageAddrees) {
+    public Doa(String nama, String doa, String ket, int imageAdrees) {
         this.nama = nama;
         this.doa = doa;
         this.ket = ket;
-        this.imageAddrees = imageAddrees;
+        this.imageAdrees = imageAdrees;
+    }
+*/
+
+    public Doa() {
+        super();
     }
 
+    public Doa(String nama, String doa, String ket, String image) {
+        super();
+        this.nama = nama;
+        this.doa = doa;
+        this.ket = ket;
+        this.image = image;
+    }
+
+    /*public int getImageAdrees() {
+        return imageAdrees;
+    }*/
 
     protected Doa(Parcel in) {
-        nama = in.readString();
-        doa = in.readString();
-        ket = in.readString();
-        imageAddrees = in.readString();
+        this.nama = in.readString();
+        this.doa = in.readString();
+        this.ket = in.readString();
+        this.image = in.readString();
     }
 
-    public static final Creator<Doa> CREATOR = new Creator<Doa>() {
+    public static final Creator<Doa> CREATOR = new Parcelable.Creator<Doa>() {
         @Override
-        public Doa createFromParcel(Parcel in) {
-            return new Doa(in);
+        public Doa createFromParcel(Parcel source) {
+            return new Doa(source);
         }
 
         @Override
@@ -81,12 +97,12 @@ public class Doa extends Model implements Parcelable {
         this.ket = ket;
     }
 
-    public String getImageAddrees() {
-        return imageAddrees;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageAddrees(String imageAddrees) {
-        this.imageAddrees = imageAddrees;
+    public void setImage(String image) {
+        this.image = image;
     }
 
 
@@ -97,10 +113,10 @@ public class Doa extends Model implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(nama);
-        parcel.writeString(doa);
-        parcel.writeString(ket);
-        parcel.writeString(imageAddrees);
+        parcel.writeString(this.nama);
+        parcel.writeString(this.doa);
+        parcel.writeString(this.ket);
+        parcel.writeString(this.image);
     }
 
     public static List<Doa> getAll() {
@@ -111,8 +127,8 @@ public class Doa extends Model implements Parcelable {
 
     public static void updateDoa(long id, Doa doa) {
         new Update(Doa.class)
-                .set("title = ?, genre = ?, year = ?, country = ?, duration = ?, imageaddress = ?",
-                        doa.getNama(), doa.getDoa(), doa.getKet(), doa.getImageAddrees())
+                .set("nama = ?, doa = ?, ket = ?, imageAddrees = ?",
+                        doa.getNama(), doa.getDoa(), doa.getKet(), doa.getImage())
                 .where("Id = ? ", id)
                 .execute();
     }
