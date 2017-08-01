@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.example.alpin.sharedpreferences.HomeFragment;
+import com.example.alpin.sharedpreferences.AddDoaFragment;
 import com.example.alpin.sharedpreferences.R;
 import com.example.alpin.sharedpreferences.model.Doa;
 
@@ -128,10 +128,10 @@ public class DetailItemActivity extends AppCompatActivity {
         Intent returnIntent = new Intent();
         if (doa != null) {
             returnIntent.putExtra("data_update", new Doa(etnama, etdoa, etket, imgDoa));
-            setResult(HomeFragment.RESULT_UPDATE, returnIntent);
+            setResult(AddDoaFragment.RESULT_UPDATE, returnIntent);
         } else {
             returnIntent.putExtra("data_add", new Doa(etnama, etdoa, etket, path));
-            setResult(HomeFragment.RESULT_ADD, returnIntent);
+            setResult(AddDoaFragment.RESULT_ADD, returnIntent);
         }
         finish();
     }

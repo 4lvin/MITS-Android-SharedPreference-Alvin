@@ -4,11 +4,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,11 +17,13 @@ import android.view.MenuItem;
 
 import com.example.alpin.sharedpreferences.auth.AboutFragment;
 import com.example.alpin.sharedpreferences.auth.LoginActivity;
+import com.example.alpin.sharedpreferences.model.Doa;
 import com.example.alpin.sharedpreferences.utility.SessionManager;
 
+import java.util.ArrayList;
+
 public class DashboardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-    SharedPreferences sharedPreferences;
+        implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +39,9 @@ public class DashboardActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-
+/*
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setNavigationItemSelectedListener(this);*/
     }
 
     @Override
@@ -55,10 +58,13 @@ public class DashboardActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.dashboard, menu);
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView)MenuItemCompat.getActionView(menuItem);
+        searchView.setOnQueryTextListener(this);
         return true;
     }
 
-    @Override
+/*    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -71,7 +77,7 @@ public class DashboardActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -82,7 +88,10 @@ public class DashboardActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             openHome();
         } else if (id == R.id.nav_gallery) {
-
+            AddDoaFragment addDoaFragment = new AddDoaFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.mainLayout, addDoaFragment)
+                    .commit();
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
@@ -108,6 +117,23 @@ public class DashboardActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.mainLayout, homeFragment)
                 .commit();
+    }
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        newText = newText.toLowerCase();
+        ArrayList<Doa> newList = new ArrayList<>();
+        for(Doa doa : HomeFragment.dataSet){
+            String name = doa.getNama().toLowerCase();
+            if(name.contains(newText))
+                newList.add(doa);
+        }
+        HomeFragment.adapter.setFilter(newList);
+        return true;
     }
 }

@@ -23,20 +23,23 @@
         android:layout_marginTop="16dp"
         android:textColor="@android:color/black"
         android:layout_gravity="center"
-        android:textSize="30sp"/>
+        android:textSize="25sp"/>
     <TextView
         android:id="@+id/tv_doa"
         android:layout_width="match_parent"
         android:gravity="center"
         android:layout_height="wrap_content"
         android:text="bismillah"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
-        android:textSize="21sp"/>
+        android:textSize="30sp"/>
     <TextView
         android:id="@+id/tv_ket"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@android:color/black"
         android:text="keterangan"
         android:textSize="18sp"
         android:layout_gravity="center"

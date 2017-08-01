@@ -27,7 +27,7 @@ public class Doa extends Model implements Parcelable {
     String image;
 
 
-/*
+
 
     int imageAdrees;
 
@@ -37,7 +37,7 @@ public class Doa extends Model implements Parcelable {
         this.ket = ket;
         this.imageAdrees = imageAdrees;
     }
-*/
+
 
 
     public Doa() {
@@ -52,9 +52,9 @@ public class Doa extends Model implements Parcelable {
         this.image = image;
     }
 
-    /*public int getImageAdrees() {
+    public int getImageAdrees() {
         return imageAdrees;
-    }*/
+    }
 
     protected Doa(Parcel in) {
         this.nama = in.readString();
@@ -137,7 +137,7 @@ public class Doa extends Model implements Parcelable {
 
     public static List<Doa> searchDoa(){
         return new Select().from(Doa.class)
-                .where("nama = ? ", "Doa sebelum makan")
+                .where("nama like ? ", "%sebelum%")
                 .orderBy("Id ASC")
                 .execute();
     }

@@ -8,8 +8,8 @@
             android:title="Home" />
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/zikir"
-            android:title="Zikir pagi" />
+            android:icon="@drawable/ic_playlist_add"
+            android:title="Add Doa" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/zikir"

@@ -12,47 +12,44 @@ import com.bumptech.glide.Glide;
 import com.example.alpin.sharedpreferences.R;
 import com.example.alpin.sharedpreferences.model.Doa;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by alpin on 23/07/17.
  */
 
-public class DoaAdapter extends RecyclerView.Adapter<DoaAdapter.MyViewHolder> {
+public class DoaStaticAdapter extends RecyclerView.Adapter<DoaStaticAdapter.MyViewHolder> {
 
     private List<Doa> dataset;
-    private Context context;
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView name;
-        ImageView image;
+        public TextView tvTitle;
+        public ImageView ivImage;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-
-            name = itemView.findViewById(R.id.tv_name);
-            image = itemView.findViewById(R.id.img_doa);
+            tvTitle = itemView.findViewById(R.id.tv_title);
+            ivImage = itemView.findViewById(R.id.iv_icon);
         }
     }
-
-    public DoaAdapter(Context context, List<Doa> dataset) {
-        this.context = context;
-        this.dataset = dataset;
+    public DoaStaticAdapter(List<Doa> inputData) {
+        dataset = inputData;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.activity_item, parent, false);
+                .inflate(R.layout.activity_item_static, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Doa doa = dataset.get(position);
+        holder.tvTitle.setText(doa.getNama());
+        holder.ivImage.setImageResource(doa.getImageAdrees());
 
-        holder.name.setText(doa.getNama());
-        Glide.with(context).load(doa.getImage()).into(holder.image);
     }
 
     @Override
@@ -64,19 +61,10 @@ public class DoaAdapter extends RecyclerView.Adapter<DoaAdapter.MyViewHolder> {
         return dataset.get(position);
     }
 
-    public void insert(Doa newDoa) {
-        dataset.add(0, newDoa);
-        notifyItemInserted(0);
-    }
-
-    public void remove(int position) {
-        dataset.remove(position);
-        notifyItemRemoved(position);
-    }
-
-    public void update(int position, Doa doa) {
-        dataset.set(position, doa);
-        notifyItemChanged(position);
+    public void setFilter(ArrayList<Doa> newList){
+        dataset = new ArrayList<>();
+        dataset.addAll(newList);
+        notifyDataSetChanged();
     }
 
 }
